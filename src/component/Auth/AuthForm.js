@@ -1,10 +1,10 @@
-import { useState, useRef } from 'react';
-
+import { useState, useRef, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import classes from './AuthForm.module.css';
-
+import ContextStore from '../store/ContextStore'; 
 const AuthForm = () => {
- 
- 
+ const navigate = useNavigate()
+ const context = useContext(ContextStore)
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading , setIsLoading] = useState(false);
   const emailInput = useRef();
@@ -41,7 +41,9 @@ const AuthForm = () => {
       alert(respons.error.message)
     }
     else{
-    console.log(respons);
+    console.log(respons.idToken);
+
+    context.addToken(respons.idToken)
     }
   } )
   
@@ -50,6 +52,7 @@ const AuthForm = () => {
   else {
     alert('Password must match')
   }
+  navigate('/home');
   }
   return (
     <>
