@@ -1,0 +1,9 @@
+.header p{
+    float : left;
+    
+}
+.header .link{
+    float: right;
+    text-decoration: none;
+
+}

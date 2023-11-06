@@ -1,5 +1,7 @@
 import React, { useContext } from 'react'
 import ContextStore from '../store/ContextStore'
+import { Link } from 'react-router-dom'
+import './Home.css'
 const Home = () => {
     const context = useContext(ContextStore)
   return (
@@ -7,7 +9,10 @@ const Home = () => {
      <button onClick = {() => {context.removeToken()
       
      }}> Logout</button>
-      <h1>Welcome to Expense Tracker</h1>
+     <div className = "header" >
+      <p >Welcome to Expense Tracker</p>
+      <Link className = "link" to = "/profile" >Your Profile is incomplete</Link>
+      </div>
     </>
   )
 }

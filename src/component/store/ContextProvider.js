@@ -4,7 +4,7 @@ import React,{useState} from 'react'
 import AuthForm from '../Auth/AuthForm';
 import { BrowserRouter as Router , Route , Routes } from 'react-router-dom';
 import Home from '../Home/Home';
-
+import Profile from '../Profile/Profile';
 const ContextProvider = (props) => {
     const [token , setToken] = useState(null);
     console.log(token)
@@ -25,6 +25,7 @@ const ContextProvider = (props) => {
       <Routes>
       <Route exact path = "/" Component = {AuthForm} />
      { context.token != null && <Route exact path = "/home" Component = {Home} /> }
+     { context.token != null && <Route exact path = "/Profile" Component = {Profile} /> }
      <Route exact path = "*" Component = {AuthForm} />
      </Routes>
     </Router>

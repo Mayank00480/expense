@@ -15,13 +15,7 @@ function App() {
    
 <ContextProvider>
 
-    <Router>
-      <Routes>
-      <Route exact path = "/" Component = {AuthForm} />
-     { context.token != null && <Route exact path = "/home" Component = {Home} /> }
-     <Route exact path = "*" Component = {AuthForm} />
-     </Routes>
-    </Router>
+   
   </ContextProvider>
   </>
   );
