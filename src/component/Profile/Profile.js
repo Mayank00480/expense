@@ -1,17 +1,37 @@
-import React,{useRef,useContext} from 'react'
+import React,{useRef,useContext, useEffect} from 'react'
 import './Profile.css'
 import ContextStore from '../store/ContextStore';
 const Profile = () => {
     const inputUrl = useRef();
     const inputName = useRef(); 
     const context = useContext(ContextStore);
+    console.log(localStorage.getItem("expenseToken"))
+    useEffect(() =>{
+   fetch('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDTR6ElU-dwM_da4ZXS4s7leT8d6kyUaI4',{
+    method : 'POST',
+    body : JSON.stringify({
+      idToken : localStorage.getItem("expenseToken") 
+    })
+   })
+   .then(res => res.json())
+   .then(resp => {
+    if(resp.error){
+      console.log(resp.error.message)
+    }
+    else {
+      console.log(resp.users[0]);
+      inputUrl.current.value = resp.users[0].photoUrl
+      inputName.current.value = resp.users[0].displayName       
+    }
+   })
+    },[])
     const submitHandler = (e) =>{
       e.preventDefault();
       console.log(inputUrl.current.value , inputName.current.value) 
       fetch('https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyDTR6ElU-dwM_da4ZXS4s7leT8d6kyUaI4',{
         method : 'POST' ,
         body : JSON.stringify({
-            idToken : context.token,
+            idToken : localStorage.getItem("expenseToken"),
             displayName : inputName.current.value,
             photoUrl : inputUrl.current.value
         })

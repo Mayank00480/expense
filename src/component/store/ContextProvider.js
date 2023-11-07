@@ -9,9 +9,12 @@ const ContextProvider = (props) => {
     const [token , setToken] = useState(null);
     console.log(token)
     const addTokenHandler = (token) =>{
-       setToken(token);
+      localStorage.setItem("expenseToken" , token); 
+      setToken(token);
+
     }
     const removeTokenHandler = () =>{
+        localStorage.removeItem("expenseToken")
         setToken(null);
     }
     const context = {
@@ -24,8 +27,8 @@ const ContextProvider = (props) => {
        <Router>
       <Routes>
       <Route exact path = "/" Component = {AuthForm} />
-     { context.token != null && <Route exact path = "/home" Component = {Home} /> }
-     { context.token != null && <Route exact path = "/Profile" Component = {Profile} /> }
+     { localStorage.getItem("expenseToken") && <Route exact path = "/home" Component = {Home} /> }
+     { localStorage.getItem("expenseToken") && <Route exact path = "/Profile" Component = {Profile} /> }
      <Route exact path = "*" Component = {AuthForm} />
      </Routes>
     </Router>
