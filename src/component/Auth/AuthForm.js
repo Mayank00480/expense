@@ -93,6 +93,7 @@ const AuthForm = () => {
           >
             {isLogin ? 'Create new account' : 'Login with existing account'}
           </button>
+          <button type = "button" className={classes.toggle} onClick={() => {navigate('/ForgotPassword')}}>Forgot Password</button>
         </div>
       </form>
     </section>

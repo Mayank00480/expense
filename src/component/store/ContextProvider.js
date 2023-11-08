@@ -1,5 +1,5 @@
 import ContextStore from './ContextStore'
-
+import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import React,{useState} from 'react'
 import AuthForm from '../Auth/AuthForm';
 import { BrowserRouter as Router , Route , Routes } from 'react-router-dom';
@@ -27,6 +27,7 @@ const ContextProvider = (props) => {
        <Router>
       <Routes>
       <Route exact path = "/" Component = {AuthForm} />
+      <Route exact path = "/ForgotPassword" Component={ForgotPassword} />
      { localStorage.getItem("expenseToken") && <Route exact path = "/home" Component = {Home} /> }
      { localStorage.getItem("expenseToken") && <Route exact path = "/Profile" Component = {Profile} /> }
      <Route exact path = "*" Component = {AuthForm} />
