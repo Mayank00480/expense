@@ -2,8 +2,13 @@ import React, { useContext } from 'react'
 import ContextStore from '../store/ContextStore'
 import { Link } from 'react-router-dom'
 import './Home.css'
+import ExpenseForm from '../expenseForm/ExpenseForm'
+import ExpenseStore from '../store/ExpenseStore'
+import ExpenseItem from '../ExpenseItems/ExpenseItem'
 const Home = () => {
     const context = useContext(ContextStore)
+    const contxt = useContext(ExpenseStore)
+    console.log(contxt.item)
     const verifyEmail = () =>{
       fetch('https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDTR6ElU-dwM_da4ZXS4s7leT8d6kyUaI4',{
         method : 'POST',
@@ -32,6 +37,8 @@ const Home = () => {
       <button onClick = {verifyEmail}> verifyEmailId</button>
       <Link className = "link" to = "/profile" >Your Profile is incomplete</Link>
       </div>
+      <ExpenseForm/>
+      <ExpenseItem/>
     </>
   )
 }

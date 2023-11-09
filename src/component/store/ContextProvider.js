@@ -5,6 +5,7 @@ import AuthForm from '../Auth/AuthForm';
 import { BrowserRouter as Router , Route , Routes } from 'react-router-dom';
 import Home from '../Home/Home';
 import Profile from '../Profile/Profile';
+import ExpenseProvider from './ExpenseProvider';
 const ContextProvider = (props) => {
     const [token , setToken] = useState(null);
     console.log(token)
@@ -24,6 +25,7 @@ const ContextProvider = (props) => {
     }
   return (
     <ContextStore.Provider value = {context}>
+      <ExpenseProvider>
        <Router>
       <Routes>
       <Route exact path = "/" Component = {AuthForm} />
@@ -33,6 +35,7 @@ const ContextProvider = (props) => {
      <Route exact path = "*" Component = {AuthForm} />
      </Routes>
     </Router>
+    </ExpenseProvider>
     </ContextStore.Provider>
   )
 }
