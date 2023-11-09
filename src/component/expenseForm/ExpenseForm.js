@@ -1,7 +1,7 @@
 import React, { useContext ,useRef} from 'react'
 import './ExpenseForm.css'
 import ExpenseStore from '../store/ExpenseStore'
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
     const context = useContext(ExpenseStore)
     const expenseItem = useRef();
     const expenseDescription = useRef();
@@ -14,9 +14,26 @@ const ExpenseForm = () => {
         expensePrice : expensePrice.current.value
      }
      context.addItems(myObj)
+     fetch('https://expensetracker-4345b-default-rtdb.firebaseio.com/expense.json',{
+      method : 'POST',
+      body : JSON.stringify(myObj),
+      headers :{
+        'Content-Type' : 'application/json'
+      }
+     })
+     .then(res => res.json())
+     .then(resp => {
+      if(resp.error){
+        alert(resp.error.message)
+      }
+      else{
+        console.log(resp);
+      }
+      props.reload();
+     })
     }
   return (
-    <form onSubmit={submitHandler}>
+    <form className = "addExpense" onSubmit={submitHandler}>
         <div className='item'>
       <label id = "item1" htmlFor = "ExpenseItem" >Expense Item</label>
       <br/>
