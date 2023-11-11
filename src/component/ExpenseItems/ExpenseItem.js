@@ -3,8 +3,12 @@ import ExpenseStore from '../store/ExpenseStore'
 import './ExpenseItem.css'
 const ExpenseItem = (props) => {
   const context = useContext(ExpenseStore);
- 
+  let totalAmount = 0;
+  props.fetchedData.forEach(item =>{
+    totalAmount += Number(item.expensePrice)
+  }) 
   const deleteExpense = (id) =>{
+
     fetch(`https://expensetracker-4345b-default-rtdb.firebaseio.com/expense/${id}.json`,{
       method : 'DELETE',
     })
@@ -29,6 +33,9 @@ const ExpenseItem = (props) => {
         }}>Edit</button>
         </li>
       })}
+      Total Amount : {totalAmount}
+      <br/>
+     {totalAmount > 10000 && <button>Activate Premium Button</button>}
     </ul>
   )
 }
