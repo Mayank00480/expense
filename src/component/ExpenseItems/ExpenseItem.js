@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import ExpenseStore from '../store/ExpenseStore'
+import ExpenseStore from '../store/ContextStore'
 import './ExpenseItem.css'
 const ExpenseItem = (props) => {
   const context = useContext(ExpenseStore);
@@ -20,7 +20,7 @@ const ExpenseItem = (props) => {
     })
   }
     return (
-    <ul>
+    <ul className = {context.darkTheme ? 'dark' : ''}>
       {props.fetchedData.length > 0 && props.fetchedData.map(item => {
         return <li key = {item.id}>{item.expenseItem}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
         {item.expenseDescription}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {item.expensePrice}
@@ -35,7 +35,9 @@ const ExpenseItem = (props) => {
       })}
       Total Amount : {totalAmount}
       <br/>
-     {totalAmount > 10000 && <button>Activate Premium Button</button>}
+     {totalAmount > 10000 && <button onClick = {() => {
+      context.toggleDarkTheme();
+     }}>Activate Premium Button</button>}
     </ul>
   )
 }

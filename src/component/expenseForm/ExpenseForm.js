@@ -2,12 +2,14 @@ import React, { useContext ,useRef,useState , useEffect} from 'react'
 import './ExpenseForm.css'
 import ExpenseStore from '../store/ExpenseStore'
 import ExpenseItem from '../ExpenseItems/ExpenseItem'
+import ContextStore from '../store/ContextStore' 
 const ExpenseForm = (props) => {
   const [fetchedData , setFetchedData] = useState([])
     useEffect(() => {
       reload()
     },[])
     const context = useContext(ExpenseStore)
+    const context2 = useContext(ContextStore)
     const expenseItem = useRef();
     const expenseDescription = useRef();
     const expensePrice = useRef();
@@ -28,6 +30,17 @@ const ExpenseForm = (props) => {
         setFetchedData(loadedData)
       })
   }
+const downloadHandler = () =>{
+  console.log(fetchedData)
+  const expenseData = JSON.stringify(fetchedData)
+ const a = document.createElement('a')
+ const blob = new Blob([expenseData]);
+ a.href =URL.createObjectURL(blob) 
+ a.download = "expense.csv"
+ a.click();
+ a.remove();
+}
+
     const submitHandler = (e) =>{
      e.preventDefault();
      const myObj = {
@@ -77,8 +90,10 @@ const ExpenseForm = (props) => {
      })
     }
   return (<>
-    <form className = "addExpense" onSubmit={submitHandler}>
-        <div className='item'>
+    <form className = "addExpense"  onSubmit={submitHandler} >
+        <div className= "item">
+          <button type = "button" onClick = {downloadHandler}> Download Expense CSV</button>
+          <br/>
       <label id = "item1" htmlFor = "ExpenseItem" >Expense Item</label>
       <br/>
       <input type = "text" id = "ExpenseItem" ref = {expenseItem} required/>

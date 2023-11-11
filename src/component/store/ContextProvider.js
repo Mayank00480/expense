@@ -8,6 +8,12 @@ import Profile from '../Profile/Profile';
 import ExpenseProvider from './ExpenseProvider';
 const ContextProvider = (props) => {
     const [token , setToken] = useState(null);
+    const [darkTheme , setDarkTheme] = useState(false);
+    const toggleDarkTheme = () =>{
+      setDarkTheme(prevState => {
+        return !prevState
+      })
+    }
     console.log(token)
     const addTokenHandler = (token) =>{
       localStorage.setItem("expenseToken" , token); 
@@ -21,10 +27,12 @@ const ContextProvider = (props) => {
     const context = {
        token : token,
        addToken : addTokenHandler ,
-       removeToken : removeTokenHandler 
+       removeToken : removeTokenHandler ,
+       darkTheme : darkTheme,
+       toggleDarkTheme : toggleDarkTheme
     }
   return (
-    <ContextStore.Provider value = {context}>
+    <ContextStore.Provider style = {{backgroundColor : 'black' , color : 'white'}}value = {context}>
       <ExpenseProvider>
        <Router>
       <Routes>
