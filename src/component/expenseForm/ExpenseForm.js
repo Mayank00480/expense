@@ -106,7 +106,7 @@ const downloadHandler = () =>{
           <br/>
       <label id = "item1" htmlFor = "ExpenseItem" >Expense Item</label>
       <br/>
-      <input type = "text" id = "ExpenseItem" ref = {expenseItem} required/>
+      <input type = "text" id = "ExpenseItem"placeholder = "userExpense" ref = {expenseItem} required/>
       <br/>
       </div>
       <div className = "description" >

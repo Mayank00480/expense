@@ -17,3 +17,23 @@ test("Third Test Case" , () => {
     const element = screen.getByText(/Expense Price/i)
     expect(element).toBeInTheDocument();
 })
+test("Fourth Test Case" , ()=>{
+    render(<ExpenseForm/>)
+    const element = screen.getByPlaceholderText(/userExpense/i)
+    expect(element).toBeInTheDocument()
+})
+test("Fifth Test Case" , ()=>{
+    render(<ExpenseForm/>)
+    const element = screen.getByPlaceholderText(/userExpense/i)
+    expect(element).toHaveAttribute("id","ExpenseItem")
+})
+test("Sixth Test Case" , ()=>{
+    render(<ExpenseForm/>)
+    const element = screen.getByPlaceholderText(/userExpense/i)
+    expect(element).toHaveAttribute("id","ExpenseItem")
+})
+test("Seventh Test Case" , ()=>{
+    render(<ExpenseForm/>)
+    const element = screen.getByText(/Expense Description/i)
+    expect(element).toHaveAttribute("id","item2")
+})

@@ -46,7 +46,7 @@ const AuthForm = () => {
     email = email.replaceAll(".","")
     email = email.replaceAll("@","");
     localStorage.setItem("expenseEmail" , email)
-    navigate('/home')
+   navigate('/home')
     context.addToken(respons.idToken)
     }
   } )
@@ -67,7 +67,7 @@ const AuthForm = () => {
       <form onSubmit={submitHandler}>
         <div className={classes.control} >
           <label htmlFor='email'>Your Email</label>
-          <input type='email' id='email' required ref = {emailInput}/>
+          <input type='email' id='email'placeholder = "userEmail" required ref = {emailInput}/>
         </div>
         <div className={classes.control}>
           <label htmlFor='password'>Your Password</label>

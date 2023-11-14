@@ -2,13 +2,14 @@ import ContextStore from './ContextStore'
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import React,{useState} from 'react'
 import AuthForm from '../Auth/AuthForm';
-import { BrowserRouter as Router , Route , Routes } from 'react-router-dom';
+import { BrowserRouter as Router , Route , Routes, useNavigate } from 'react-router-dom';
 import Home from '../Home/Home';
 import Profile from '../Profile/Profile';
 import ExpenseProvider from './ExpenseProvider';
 const ContextProvider = (props) => {
     const [token , setToken] = useState(null);
     const [darkTheme , setDarkTheme] = useState(false);
+  //  const navigate = useNavigate();
     const toggleDarkTheme = () =>{
       setDarkTheme(prevState => {
         return !prevState
@@ -18,7 +19,7 @@ const ContextProvider = (props) => {
     const addTokenHandler = (token) =>{
       localStorage.setItem("expenseToken" , token); 
       setToken(token);
-
+    // navigate('/home')
     }
     const removeTokenHandler = () =>{
         localStorage.removeItem("expenseToken")
