@@ -41,8 +41,12 @@ const AuthForm = () => {
       alert(respons.error.message)
     }
     else{
-    console.log(respons.idToken);
-
+    console.log(respons.email);
+    let email = respons.email;
+    email = email.replaceAll(".","")
+    email = email.replaceAll("@","");
+    localStorage.setItem("expenseEmail" , email)
+    navigate('/home')
     context.addToken(respons.idToken)
     }
   } )
@@ -52,7 +56,7 @@ const AuthForm = () => {
   else {
     alert('Password must match')
   }
-  navigate('/home');
+ 
   }
   return (
     <>

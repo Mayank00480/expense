@@ -8,22 +8,23 @@ const ExpenseItem = (props) => {
     totalAmount += Number(item.expensePrice)
   }) 
   const deleteExpense = (id) =>{
- if(localStorage.getItem("expenseToken")){
-    fetch(`https://expensetracker-4345b-default-rtdb.firebaseio.com/expense/${localStorage.getItem("expenseToken").substring(0,11)}/${id}.json`,{
+
+    fetch(`https://expensetracker-4345b-default-rtdb.firebaseio.com/expense/${localStorage.getItem("expenseEmail")}/${id}.json`,{
       method : 'DELETE',
     })
     .then(res => res.json )
     .then(resp => {
       console.log(resp);
       console.log('Successfully Deleted')
-      props.reload();
-      console.log(props.reload)
+      props.rel();
+     
+      
     })
-  }}
+  }
     return (
     <ul className = {context.darkTheme ? 'dark' : ''}>
      { console.log(props.fetchedData)}
-      {props.fetchedData.length > 0 && props.fetchedData.map(item => {
+      {props.fetchedData && props.fetchedData.map(item => {
         return <li key = {item.id}>{item.expenseItem}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
         {item.expenseDescription}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {item.expensePrice}
         <button className = "delete" onClick = {() => {

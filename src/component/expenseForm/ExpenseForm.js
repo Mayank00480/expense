@@ -5,7 +5,7 @@ import ExpenseItem from '../ExpenseItems/ExpenseItem'
 import ContextStore from '../store/ContextStore' 
 const ExpenseForm = (props) => {
   const [fetchedData , setFetchedData] = useState([])
-  console.log(localStorage.getItem("expenseToken"))
+ 
     useEffect(() => {
       reload()
     },[])
@@ -14,13 +14,13 @@ const ExpenseForm = (props) => {
     const expenseItem = useRef();
     const expenseDescription = useRef();
     const expensePrice = useRef();
-    const reload = () =>{
-      if(localStorage.getItem("expenseToken")){
-      fetch(`https://expensetracker-4345b-default-rtdb.firebaseio.com/expense/${localStorage.getItem("expenseToken").substring(0,11)}.json`)
+    function reload(){
+     
+      fetch(`https://expensetracker-4345b-default-rtdb.firebaseio.com/expense/${localStorage.getItem("expenseEmail")}.json`)
       .then(res => res.json())
       .then(resp => {
-       
-        if(resp) {
+       console.log(1)
+      
         let loadedData = []
         for(let key in resp){
           console.log(key)
@@ -32,10 +32,11 @@ const ExpenseForm = (props) => {
             })
         }
         setFetchedData(loadedData)
-      }
+        
+      
       })
     }
-  }
+  
 const downloadHandler = () =>{
   console.log(fetchedData)
   const expenseData = JSON.stringify(fetchedData)
@@ -55,8 +56,8 @@ const downloadHandler = () =>{
         expensePrice : expensePrice.current.value
      }
      context.addItems(myObj)
-     if(localStorage.getItem("expenseToken")){
-     fetch(`https://expensetracker-4345b-default-rtdb.firebaseio.com/expense/${localStorage.getItem("expenseToken").substring(0,11)}.json`,{
+     
+     fetch(`https://expensetracker-4345b-default-rtdb.firebaseio.com/expense/${localStorage.getItem("expenseEmail")}.json`,{
       method : 'POST',
       body : JSON.stringify(myObj),
       headers :{
@@ -74,7 +75,7 @@ const downloadHandler = () =>{
       reload();
      })
     }
-    }
+    
     const editExpense = (id) =>{
       const myObj = {
         expenseItem : expenseItem.current.value,
@@ -83,7 +84,7 @@ const downloadHandler = () =>{
      }
      console.log(id)
      if(localStorage.getItem("expenseToken")){
-     fetch(`https://expensetracker-4345b-default-rtdb.firebaseio.com/expense/${localStorage.getItem("expenseToken").substring(0,11)}/${id}.json`,{
+     fetch(`https://expensetracker-4345b-default-rtdb.firebaseio.com/expense/${localStorage.getItem("expenseEmail")}/${id}.json`,{
       method : 'PUT',
       body : JSON.stringify(myObj)
      })
@@ -122,7 +123,7 @@ const downloadHandler = () =>{
       </div>
       <input type = "submit" />
     </form>
-    <ExpenseItem fetchedData = {fetchedData} reload = {reload} editExpense = {editExpense}/>
+    <ExpenseItem fetchedData = {fetchedData} rel = {reload} editExpense = {editExpense}/>
     </>
   )
 }
