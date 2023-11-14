@@ -44,7 +44,7 @@ const ForgotPassword = () => {
         </div>
      
         <div className={classes.actions}>
-         {isLoading && <p>Loading...</p> }
+         {isLoading && <p style = {{color : 'white'}}> Loading...</p> }
           {!isLoading && <button type = "button" onClick = {forgotEmail}>Send Link</button> }
           <button type = "button" className = {classes.toggle} onClick = {() => {navigate('/auth')}}> Already a User? Login</button>
         </div>

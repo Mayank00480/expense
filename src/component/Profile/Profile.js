@@ -1,7 +1,9 @@
 import React,{useRef,useContext, useEffect} from 'react'
 import './Profile.css'
 import ContextStore from '../store/ContextStore';
+import { useNavigate } from 'react-router-dom';
 const Profile = () => {
+  const navigate = useNavigate()
     const inputUrl = useRef();
     const inputName = useRef(); 
     const context = useContext(ContextStore);
@@ -43,9 +45,11 @@ const Profile = () => {
     }
         else{
             console.log(resp);
+            navigate('/home')
         }
 })
       .catch(err => console.log(err)); 
+    
   }
 
   return (

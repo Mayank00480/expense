@@ -8,8 +8,8 @@ const ExpenseItem = (props) => {
     totalAmount += Number(item.expensePrice)
   }) 
   const deleteExpense = (id) =>{
-
-    fetch(`https://expensetracker-4345b-default-rtdb.firebaseio.com/expense/${id}.json`,{
+ if(localStorage.getItem("expenseToken")){
+    fetch(`https://expensetracker-4345b-default-rtdb.firebaseio.com/expense/${localStorage.getItem("expenseToken").substring(0,11)}/${id}.json`,{
       method : 'DELETE',
     })
     .then(res => res.json )
@@ -17,10 +17,12 @@ const ExpenseItem = (props) => {
       console.log(resp);
       console.log('Successfully Deleted')
       props.reload();
+      console.log(props.reload)
     })
-  }
+  }}
     return (
     <ul className = {context.darkTheme ? 'dark' : ''}>
+     { console.log(props.fetchedData)}
       {props.fetchedData.length > 0 && props.fetchedData.map(item => {
         return <li key = {item.id}>{item.expenseItem}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
         {item.expenseDescription}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {item.expensePrice}
@@ -33,9 +35,9 @@ const ExpenseItem = (props) => {
         }}>Edit</button>
         </li>
       })}
-      Total Amount : {totalAmount}
+    { totalAmount > 0 && <>Total Amount : {totalAmount}</> }
       <br/>
-     {totalAmount > 10000 && <button onClick = {() => {
+     {totalAmount > 10000 && <button id = "prem" onClick = {() => {
       context.toggleDarkTheme();
      }}>Activate Premium Button</button>}
     </ul>

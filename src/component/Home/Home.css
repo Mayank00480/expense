@@ -7,3 +7,46 @@
     text-decoration: none;
 
 }
+.component #logout{
+position: relative;
+left : 600px;
+top : 45px;
+padding: 5px;
+border-radius: 5px;
+background-color: white;
+}
+.component{
+    background-color: wheat;
+  
+    height : 120px;
+}
+.component button{
+    cursor: pointer;
+}
+.component p {
+    position: relative;
+    bottom: 20px;
+}
+#verifyEmail{
+    padding: 5px;
+    background-color: white;
+    border-radius: 5px;
+    position: relative;
+    left : 500px;
+    top:17px;
+}
+.component .link{
+    color : black;
+    border: 1px solid black;
+    background-color: white;
+    padding: 5px;
+    margin-top: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+.expenseData{
+    background-color: aqua;
+    height:1100px;
+    position: relative;
+    bottom: 100px;
+}
