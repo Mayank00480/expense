@@ -37,3 +37,8 @@ test("Seventh Test Case" , ()=>{
     const element = screen.getByText(/Expense Description/i)
     expect(element).toHaveAttribute("id","item2")
 })
+test("Eigth Test Case" , ()=>{
+    render(<ExpenseForm/>)
+    const element = screen.getByPlaceholderText(/price/i)
+    expect(element).toHaveAttribute("id","ExpensePrice")
+})
